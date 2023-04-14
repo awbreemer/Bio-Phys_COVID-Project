@@ -12,17 +12,25 @@ class neuronV1():
         self.infected = infected
         self.recovered = recovered
 
+    def __str__(self) -> str:
+        return str(self.infectivity)
+
     def infected_step(self):
         self.infectivity = self.infectivity_steps[self.infection_step+1]
         if self.infection_step >= len(self.infectivity_steps):
             self.infected = False
+            self.infection_step = 0
+        self.infection_step += 1
 
     def take_step(self):
-        if self.infected:
+        if self.is_infected():
             self.infected_step()
 
     def is_infected(self):
         return self.infected
+    
+    def get_first_loc_val(self):
+        return self.location[0]
     
     def is_recovered(self):
         return self.recovered
@@ -47,12 +55,18 @@ class neuronV1():
     
     def get_connected_neurons(self):
         return self.connected_neurons
+    
+    def get_infection_step(self):
+        return self.infection_step
+    
+    def add_neuron_connect(self, neuron):
+        self.connected_neurons.append(neuron)
 
     def connect_neuron(self, other_neuron):
         if other_neuron not in self.connected_neurons:
             self.connected_neurons.append(other_neuron)
         if self not in other_neuron.get_connected_neurons():
-            other_neuron.connected_neurons.append(self)
+            other_neuron.add_neuron_connect(self)
 
     def attempt_infect(self):
         for n in self.connected_neurons:
