@@ -4,7 +4,7 @@ import random as rand
 class neuronV1():
 
     infectivity_steps = [.2, .5, .7, .6, .4, .3, .2, .1]
-    connected_neurons = []
+    connected_neurons = list()
 
     def __init__(self, infection_step = 0, infectivity = 0, infected = False, recovered = False):
         self.infection_step = infection_step
@@ -59,14 +59,13 @@ class neuronV1():
     def get_infection_step(self):
         return self.infection_step
     
-    def add_neuron_connect(self, neuron):
+    def add_neuron_connect_test(self, neuron):
         self.connected_neurons.append(neuron)
 
     def connect_neuron(self, other_neuron):
-        if other_neuron not in self.connected_neurons:
+        if other_neuron not in self.connected_neurons and other_neuron != self:
             self.connected_neurons.append(other_neuron)
-        if self not in other_neuron.get_connected_neurons():
-            other_neuron.add_neuron_connect(self)
+            #other_neuron.connected_neurons.append(self)
 
     def attempt_infect(self):
         for n in self.connected_neurons:
