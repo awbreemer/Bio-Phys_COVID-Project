@@ -4,19 +4,24 @@ import random as rand
 class neuronV1():
 
     infectivity_steps = [.2, .5, .7, .6, .4, .3, .2, .1]
-    connected_neurons = list()
 
     def __init__(self, infection_step = 0, infectivity = 0, infected = False, recovered = False):
         self.infection_step = infection_step
         self.infectivity = infectivity
         self.infected = infected
         self.recovered = recovered
+        self.connected_neurons = list()
 
     def __str__(self) -> str:
         return str(self.infectivity)
 
     def infected_step(self):
-        self.infectivity = self.infectivity_steps[self.infection_step+1]
+        try:
+            self.infectivity = self.infectivity_steps[self.infection_step+1]
+        except:
+            self.infectivity = 0
+            self.infected = False
+
         if self.infection_step >= len(self.infectivity_steps):
             self.infected = False
             self.infection_step = 0

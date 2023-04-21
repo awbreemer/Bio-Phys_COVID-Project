@@ -34,5 +34,5 @@ for n in neuron_list:
           
               
 raster = plt.plot(range(len(raster_record)), raster_record)
-
+plt.show(raster)
 
