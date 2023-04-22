@@ -3,13 +3,15 @@ import random as rand
 
 class neuronV1():
 
-    infectivity_steps = [.2, .5, .7, .6, .4, .3, .2, .1]
+    infectivity_steps = [.05, .1, .2, .4, .15, .1, .05, .01]
+    time_to_be_suseptible = 50
 
     def __init__(self, infection_step = 0, infectivity = 0, infected = False, recovered = False):
         self.infection_step = infection_step
         self.infectivity = infectivity
         self.infected = infected
         self.recovered = recovered
+        self.steps_since_infected= 0
         self.connected_neurons = list()
 
     def __str__(self) -> str:
@@ -21,13 +23,18 @@ class neuronV1():
         except:
             self.infectivity = 0
             self.infected = False
-
-        if self.infection_step >= len(self.infectivity_steps):
-            self.infected = False
-            self.infection_step = 0
+            self.recovered = True
+        self.attempt_infect()
         self.infection_step += 1
 
     def take_step(self):
+        
+        if self.recovered == True:
+            if self.steps_since_infected >= self.time_to_be_suseptible:
+                self.recovered = False
+                self.steps_since_infected = 0
+            else:
+                self.steps_since_infected += 1
         if self.is_infected():
             self.infected_step()
 
@@ -70,12 +77,11 @@ class neuronV1():
     def connect_neuron(self, other_neuron):
         if other_neuron not in self.connected_neurons and other_neuron != self:
             self.connected_neurons.append(other_neuron)
-            #other_neuron.connected_neurons.append(self)
+            other_neuron.connected_neurons.append(self)
 
     def attempt_infect(self):
         for n in self.connected_neurons:
             if rand.random() < self.infectivity:
-                if not n.is_recovered():
-                    n.gets_infected()
+                n.gets_infected()
 
     
