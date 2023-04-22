@@ -3,8 +3,8 @@ import random as rand
 
 class neuronV1():
 
-    infectivity_steps = [.05, .1, .2, .4, .15, .1, .05, .01]
-    time_to_be_suseptible = 50
+    infectivity_steps = [.05, .1, .25, .3, .15, .1, .05, .01]
+    time_to_be_suseptible = 30
 
     def __init__(self, infection_step = 0, infectivity = 0, infected = False, recovered = False):
         self.infection_step = infection_step
@@ -18,14 +18,16 @@ class neuronV1():
         return str(self.infectivity)
 
     def infected_step(self):
-        try:
+        if self.infection_step < len(self.infectivity_steps)-1:
             self.infectivity = self.infectivity_steps[self.infection_step+1]
-        except:
-            self.infectivity = 0
+            self.infection_step += 1
+        else:
             self.infected = False
             self.recovered = True
+            self.infectivity = 0
+            self.infection_step = 0
         self.attempt_infect()
-        self.infection_step += 1
+
 
     def take_step(self):
         
@@ -51,7 +53,7 @@ class neuronV1():
         return self.infectivity
     
     def gets_infected(self):
-        if not self.recovered:
+        if not self.recovered and not self.infected:
             self.infected = True
             self.infectivity = self.infectivity_steps[0]
             self.infection_step = 1

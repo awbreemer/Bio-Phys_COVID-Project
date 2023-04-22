@@ -3,11 +3,12 @@ import numpy as np
 import basic_neuron as bn
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
+import os
 
-side_length = 25 # the number of neurons on each side of the matrix
-time_steps = 100
+side_length = 100 # the number of neurons on each side of the matrix
+time_steps = 200
 neuron_matrix = [[bn.neuronV1() for _ in range(side_length)] for _ in range(side_length)]
-inf_x, inf_y = 2,2
+inf_x, inf_y = 50,50
 
 
 #set up connections
@@ -42,3 +43,6 @@ for t in range(time_steps):
 
 ani = animation.FuncAnimation(fig, animate, time_steps, interval = 50, blit = False)
 plt.show()
+
+ani.save("./InitialAnimation1.gif", writer='imagemagick', fps=60)
+print(os.getcwd())
