@@ -4,6 +4,7 @@ import basic_neuron as bn
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 import os
+import random
 
 side_length = 100 # the number of neurons on each side of the matrix
 time_steps = 200
@@ -28,6 +29,14 @@ fig, ax = plt.subplots()
 def animate(i):
     ax.clear()
     ax.contourf(data_stack[i], cmap = 'plasma')
+
+def add_random_connect(p, neur_matrix):
+    for x in range(side_length):
+        for y in range(side_length):
+            if random.random() < p:
+                neur_matrix[x][y].connect_neuron(neur_matrix[random.randint(0,side_length-1)][random.randint(0,side_length-1)])
+
+add_random_connect(.1, neuron_matrix)
 
 neuron_matrix[inf_x][inf_y].gets_infected()
 

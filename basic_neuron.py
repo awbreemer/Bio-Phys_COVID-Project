@@ -3,8 +3,8 @@ import random as rand
 
 class neuronV1():
 
-    infectivity_steps = [.05, .1, .25, .3, .15, .1, .05, .01]
-    time_to_be_suseptible = 30
+    infectivity_steps = [.05, .1, .2, .2, .15, .1, .0, .02]
+    time_to_be_suseptible = 10
 
     def __init__(self, infection_step = 0, infectivity = 0, infected = False, recovered = False):
         self.infection_step = infection_step

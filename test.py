@@ -1,8 +1,13 @@
 import numpy as np
 import basic_neuron as bn
+import math
+import WorldNeuron as wn
+import geopandas as gpd
 
-n1 = bn.neuronV1()
-n2 = bn.neuronV1()
+world = gpd.read_file(gpd.datasets.get_path('naturalearth_lowres'))
+for i, country in world.iterrows():
+    print(f"The code is {country['iso_a3']} and the name is {country['name']}")
+
 #n3 = bn.neuronV1()
 
 
@@ -32,9 +37,4 @@ if n1 in n1.connected_neurons:
 else:
     print(n2.connected_neurons) """
 
-a = np.array([[1,2],[3,4]])
-b = np.empty((2,2))
-print(a)
-print(b)
-c = np.array([a,b])
-print(c)
+
