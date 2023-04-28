@@ -3,7 +3,7 @@ import random as rand
 
 class neuronV1():
 
-    infectivity_steps = [.05, .1, .2, .2, .15, .1, .0, .02]
+    infectivity_steps = [.05, .1, .3, .4, .3, .2, .1, .05]
     time_to_be_suseptible = 10
 
     def __init__(self, infection_step = 0, infectivity = 0, infected = False, recovered = False):
