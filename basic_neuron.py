@@ -28,7 +28,7 @@ class neuronV1():
             self.infection_step = 0
         self.attempt_infect()
 
-
+ 
     def take_step(self):
         
         if self.recovered == True:

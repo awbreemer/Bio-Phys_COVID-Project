@@ -4,9 +4,11 @@ import math
 import WorldNeuron as wn
 import geopandas as gpd
 
-world = gpd.read_file(gpd.datasets.get_path('naturalearth_lowres'))
-for i, country in world.iterrows():
-    print(f"The code is {country['iso_a3']} and the name is {country['name']}")
+print(np.logspace(0,1,20))
+
+#world = gpd.read_file(gpd.datasets.get_path('naturalearth_lowres'))
+#for i, country in world.iterrows():
+#    print(f"The code is {country['iso_a3']} and the name is {country['name']}")
 
 #n3 = bn.neuronV1()
 
